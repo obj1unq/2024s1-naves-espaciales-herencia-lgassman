@@ -1,65 +1,65 @@
 import naves.*
 
-//test "1. propulsar" {
-//    //Testear que una nave de carga sin velocidad al propulsarse 
-//    // queda con una velocidad de 20.000 kms/seg.     
-//	var nave = new NaveDeCarga()
-//	nave.propulsar()
-//	assert.equals(20000, nave.velocidad())
-//
-//    // Y que una nave de pasajeros que viaja a 290.000 kms/seg al propulsarse 
-//    //queda viajando a 300.000 kms/seg.
-//	nave = new NaveDePasajeros(velocidad=290000)
-//	nave.propulsar()
-//	assert.equals(300000, nave.velocidad())
-//	
-//}
+test "1. propulsar" {
+    //Testear que una nave de carga sin velocidad al propulsarse 
+    // queda con una velocidad de 20.000 kms/seg.     
+	var nave = new NaveDeCarga(velocidad=0)
+	nave.propulsar()
+	assert.equals(20000, nave.velocidad())
 
-//test "2. nave de carga radiactivos" {
-//	//Construir una nave que transporta 5.000 kg de residuos radiactivos sellados al vacío
-//	// a 10.000 kms/seg y testear que al recibir una amenaza frenan pero su carga
-//	// sigue siendo la misma.
-//	
-//	const nave = new NaveDeCargaRadiactivos(carga=5000, velocidad=10000, sellada=true)
-//	nave.recibirAmenaza()
-//	assert.equals(0, nave.velocidad())
-//	assert.equals(5000, nave.carga())
-//	
-//}
+    // Y que una nave de pasajeros que viaja a 290.000 kms/seg al propulsarse 
+    //queda viajando a 300.000 kms/seg.
+	nave = new NaveDePasajeros(velocidad=290000)
+	nave.propulsar()
+	assert.equals(300000, nave.velocidad())
+	
+}
+
+test "2. nave de carga radiactivos" {
+	//Construir una nave que transporta 5.000 kg de residuos radiactivos sellados al vacío
+	// a 10.000 kms/seg y testear que al recibir una amenaza frenan pero su carga
+	// sigue siendo la misma.
+	
+	const nave = new NaveDeCargaRadiactiva(carga=5000, velocidad=10000, sellada=true)
+	nave.recibirAmenaza()
+	assert.equals(0, nave.velocidad())
+	assert.equals(5000, nave.carga())
+	
+}
 
 
-//test "3. preparar para viajar" {
-//	//Una nave de pasajeros que viaja a 290.000 kms/seg al prepararse para viajar queda con velocidad de 300.000 kms/seg.
-//    var nave = new NaveDePasajeros(velocidad=290000)
-//    nave.prepararParaViajar()
-//    assert.equals(300000, nave.velocidad())
-//    
-//    //Una nave de residuos radiactivos sin velocidad y que no está sellada al prepararse para viajar queda con velocidad de 15.000 kms/seg y sellada al vacío.
-//    nave = new NaveDeCargaRadiactivos(velocidad=0, sellada=false)
-//    nave.prepararParaViajar()
-//    assert.that(nave.sellada())
-//    assert.equals(15000, nave.velocidad())
-//    
-////    Una nave de combate en modo ataque sin velocidad al prepararse para viajar
-////     emite el mensaje "Volviendo a la base" y queda con velocidad de 15.000 kms/seg
-//    nave = new NaveDeCombate(velocidad=0, modo=ataque)
-//    nave.prepararParaViajar()
-//    assert.equals(["Volviendo a la base"], nave.mensajesEmitidos())
-//    assert.equals(15000, nave.velocidad())
-//
-////    Una nave de combate en modo reposo sin velocidad al prepararse para viajar emite el mensaje "Saliendo en misión", queda en modo ataque y con velocidad de 15.000 kms/seg
-//    nave = new NaveDeCombate(velocidad=0, modo=reposo)
-//    nave.prepararParaViajar()
-//    assert.equals(["Saliendo en misión"], nave.mensajesEmitidos())
-//    assert.equals(15000, nave.velocidad())
-//    assert.equals(ataque, nave.modo())
-// 
-//}
+test "3. preparar para viajar" {
+	//Una nave de pasajeros que viaja a 290.000 kms/seg al prepararse para viajar queda con velocidad de 300.000 kms/seg.
+    var nave = new NaveDePasajeros(velocidad=290000)
+    nave.prepararParaViajar()
+    assert.equals(300000, nave.velocidad())
+    
+    //Una nave de residuos radiactivos sin velocidad y que no está sellada al prepararse para viajar queda con velocidad de 15.000 kms/seg y sellada al vacío.
+    nave = new NaveDeCargaRadiactiva(velocidad=0, sellada=false)
+    nave.prepararParaViajar()
+    assert.that(nave.sellada())
+    assert.equals(15000, nave.velocidad())
+    
+//    Una nave de combate en modo ataque sin velocidad al prepararse para viajar
+//     emite el mensaje "Volviendo a la base" y queda con velocidad de 15.000 kms/seg
+    nave = new NaveDeCombate(velocidad=0, modo=ataque)
+    nave.prepararParaViajar()
+    assert.equals(["Volviendo a la base"], nave.mensajesEmitidos())
+    assert.equals(15000, nave.velocidad())
 
-//test "4. encontrarEnemigo" {
-//	//Testear que una nave de pasajeros sin velocidad al encontrarse con un enemigo queda con velocidad de 20.000 kms/seg y su alarma en caso de emergencia activada.
-//	const nave = new NaveDePasajeros(velocidad=0)
-//	nave.encontrarEnemigo()
-//	assert.equals(20000, nave.velocidad())
-//	assert.that(nave.alarma())
-//}
+//    Una nave de combate en modo reposo sin velocidad al prepararse para viajar emite el mensaje "Saliendo en misión", queda en modo ataque y con velocidad de 15.000 kms/seg
+    nave = new NaveDeCombate(velocidad=0, modo=reposo)
+    nave.prepararParaViajar()
+    assert.equals(["Saliendo en misión"], nave.mensajesEmitidos())
+    assert.equals(15000, nave.velocidad())
+    assert.equals(ataque, nave.modo())
+ 
+}
+
+test "4. encontrarEnemigo" {
+	//Testear que una nave de pasajeros sin velocidad al encontrarse con un enemigo queda con velocidad de 20.000 kms/seg y su alarma en caso de emergencia activada.
+	const nave = new NaveDePasajeros(velocidad=0)
+	nave.encontrarEnemigo()
+	assert.equals(20000, nave.velocidad())
+	assert.that(nave.alarma())
+}
